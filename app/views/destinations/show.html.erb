@@ -1,0 +1,32 @@
+<br>
+<br>
+users.index
+<br>
+
+<h3>This page features a map showing the user's current location (blue), the destination (red), and any spaces near the destination that are available (green) or available soon (red).</h3>
+
+
+<h2><%= @destination.address %></h2>
+
+
+
+
+
+  	<script>
+   	
+    var dest_lat = <%= @destination.latitude %>
+    var dest_long = <%= @destination.longitude %>
+
+	var user_lat = <%= @destination.user_act_latitude %>
+    var user_long = <%= @destination.user_act_longitude %>
+
+
+    </script>
+
+
+<div id="map"></div>
+
+<br>
+
+
+<%= link_to "reset destination", destination_path(@destination), method: :delete %>
