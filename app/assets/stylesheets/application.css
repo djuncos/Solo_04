@@ -16,12 +16,56 @@
 
 
 	  #map {
-        height: 50%;
+        height: 100%;
         width: 50%;
+        display: inline-block;
+        float: left;
+        /*display: none;*/
       }
       
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+      }
+
+      .container{
+      	width: 100%;
+      	height: 50%;
+      	border: solid orange 1px;
+      }
+
+      .spaceContainer{
+
+      	width: 50%;
+      	height: 100%;
+      	outline: solid blue 1px;
+      	display: inline-block;
+        float: left;
+
+
+      }
+
+      .greenSpaceClick{
+
+      	height: 30px;
+      	width: 20%;
+        outline: solid green 2px;
+
+      }
+
+      .yellowSpaceClick{
+
+        height: 30px;
+        width: 20%;
+        outline: solid yellow 2px;
+
+      }
+
+      .spaceClick:hover {
+
+        cursor:pointer;
+        text-decoration-line: underline;
+
+
       }

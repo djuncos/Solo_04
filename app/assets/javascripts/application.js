@@ -11,7 +11,17 @@
 // about supported directives.
 //
 //= require jquery
+//= require turbolinks
 //= require jquery_ujs
 //= require_tree
 
+
  
+
+
+
+
+ $('.spaceContainer').append(
+							  
+							    	"Hello"
+				);

@@ -11,8 +11,12 @@ destinations.show
 <h2><%= @destination.address %></h2>
 
 
-<script>
-   
+<script type="text/javascript">
+
+
+	var m=0
+   	var n=0
+
    	var acceptable_distance = 700 //meters
 
 	var locations_green = []
@@ -44,7 +48,7 @@ destinations.show
 
 	<% @spaces_green.each do |space| %>
 		<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
-		<script>	
+		<script type="text/javascript">	
 			var hori = <%= space.latitude %>
 			var vert = <%= space.longitude %>
 			if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
@@ -57,7 +61,7 @@ destinations.show
 
 	<% @spaces_yellow.each do |space| %>
 		<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
-		<script>	
+		<script type="text/javascript">	
 			var hori = <%= space.latitude %>
 			var vert = <%= space.longitude %>
 			if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
@@ -69,7 +73,7 @@ destinations.show
 
 
 
-<script>
+<script type="text/javascript">
 
 	function midpoint(x,y){
         return y
@@ -115,11 +119,46 @@ destinations.show
 
 </script>
 
-
-<div id="map"></div>
-
+<div class="container">
+	<div id="map"></div>
+	<div class="spaceContainer"></div>
+</div>
 <br>
  
 
 
 <%= link_to "reset destination", destination_path(@destination), method: :delete %>
+
+<script type="text/javascript">
+
+function generate_handler(i) {
+				    return function(event) {       
+				       alert("hello "+i)
+				    };
+	}
+	
+m = locations_green.length
+n = locations_yellow.length
+
+for(i=1;i<=m;i++){
+	$('.spaceContainer').append(
+							"<div class='greenSpaceClick spaceClick' id='spaceID"+i+"'>Space "+i+"</div>"
+						);
+	$('#spaceID'+ i).click(
+	    			generate_handler(i)
+	    			// scalePlayer(arrayOfScaleArrays[i]) 
+				);
+}
+
+for(i=1;i<=n;i++){
+	var t=m+i
+	$('.spaceContainer').append(
+							"<div class='yellowSpaceClick spaceClick' id='spaceID"+t+"'>Space "+t+"</div>"
+						);
+	$('#spaceID'+ t).click(
+	    			generate_handler(t)
+	    			// scalePlayer(arrayOfScaleArrays[i]) 
+				);
+}
+
+</script>

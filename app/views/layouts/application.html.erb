@@ -4,9 +4,13 @@
     <title>Solo04</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYca2a6AWCOLReuJ4AqN8EYGG9dAKcYL8&callback=initMap"
+  type="text/javascript"></script>
+ <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+ <!--  <script src='/assets/javascripts/application.js'></script> -->
 
   <body>
 
@@ -34,8 +38,7 @@
     <%= yield %>
 
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYca2a6AWCOLReuJ4AqN8EYGG9dAKcYL8&callback=initMap"
-  type="text/javascript"></script>
+
     
   </body>
 </html>
