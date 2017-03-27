@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327025336) do
+ActiveRecord::Schema.define(version: 20170327045109) do
 
   create_table "destinations", force: :cascade do |t|
     t.datetime "created_at",         null: false
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20170327025336) do
     t.decimal  "longitude"
     t.decimal  "user_act_latitude"
     t.decimal  "user_act_longitude"
+  end
+
+  create_table "spaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.integer  "status"
+    t.boolean  "claimed"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,3 +51,7 @@ ActiveRecord::Schema.define(version: 20170327025336) do
   end
 
 end
+
+
+
+

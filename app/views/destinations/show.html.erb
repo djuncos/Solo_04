@@ -1,32 +1,125 @@
+
+
 <br>
 <br>
-users.index
+destinations.show
 <br>
 
-<h3>This page features a map showing the user's current location (blue), the destination (red), and any spaces near the destination that are available (green) or available soon (red).</h3>
+<h3>This page features a map showing the user's current location (blue), the destination (red), and any spaces near the destination that are available (green) or available soon (yellow).</h3>
 
 
 <h2><%= @destination.address %></h2>
 
 
+<script>
+   
+   	var acceptable_distance = 700 //meters
 
+	var locations_green = []
+  	var locations_yellow =[]
 
-
-  	<script>
-   	
-    var dest_lat = <%= @destination.latitude %>
+  	var dest_lat = <%= @destination.latitude %>
     var dest_long = <%= @destination.longitude %>
 
 	var user_lat = <%= @destination.user_act_latitude %>
     var user_long = <%= @destination.user_act_longitude %>
 
+  	function distance(lat1,long1,lat2,long2){
+	    var R = 6371e3; // metres
+	    var φ1 = lat1*Math.PI/180;
+	    var φ2 = lat2*Math.PI/180;
+	    var Δφ = (lat2-lat1)*Math.PI/180;
+	    var Δλ = (long2-long1)*Math.PI/180;
+	    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+	        Math.cos(φ1) * Math.cos(φ2) *
+	        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c;
+	    return d
+  	}
 
-    </script>
+
+</script>
+
+
+	<% @spaces_green.each do |space| %>
+		<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
+		<script>	
+			var hori = <%= space.latitude %>
+			var vert = <%= space.longitude %>
+			if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
+				var together = {lat: hori,lng:vert}
+				locations_green.push(together)
+			}
+		</script>
+	<% end %>
+
+
+	<% @spaces_yellow.each do |space| %>
+		<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
+		<script>	
+			var hori = <%= space.latitude %>
+			var vert = <%= space.longitude %>
+			if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
+				var together = {lat: hori,lng:vert}
+				locations_yellow.push(together)
+			}
+		</script>
+	<% end %>
+
+
+
+<script>
+
+	function midpoint(x,y){
+        return y
+  	}
+
+  	function initMap() {
+        var dest_location = {lat: dest_lat, lng: dest_long};
+        var user_location = {lat: user_lat, lng: user_long};
+        var focalpoint = midpoint(user_location,dest_location)
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: focalpoint
+        });
+        var destination_marker = new google.maps.Marker({
+          position: dest_location,    
+          map: map
+        });
+        var user_marker = new google.maps.Marker({
+          position: user_location,
+          icon: '/assets/car02.png',    
+          map: map
+        });
+        var k = locations_green.length
+        var markersGreen = locations_green.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: (i+1).toString(),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green.png',
+            map: map
+          });
+        });
+        var markersYellow = locations_yellow.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: (i+1+k).toString(),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow.png',
+            map: map
+          });
+        });
+    }
+
+
+</script>
 
 
 <div id="map"></div>
 
 <br>
+ 
 
 
 <%= link_to "reset destination", destination_path(@destination), method: :delete %>
