@@ -4,11 +4,15 @@ Rails.application.routes.draw do
 
 
   get '/' => "users#index"
+  put "/put", to: "spaces#put", as: "put"
 
   root 'home#index'
 
   resources :destinations
   resources :spaces
+  # resources :spaces, { :except => [:show, :new, :index] }
+
+  # patch "/spaces", to: "spaces#show"
 
 
 end

@@ -1,4 +1,4 @@
-class DestinationsController < ApplicationController
+	class DestinationsController < ApplicationController
 
 
 		def new

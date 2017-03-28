@@ -21,7 +21,3 @@
 
 
 
- $('.spaceContainer').append(
-							  
-							    	"Hello"
-				);

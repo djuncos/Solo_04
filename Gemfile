@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'json', '~> 1.8.3'
+
 gem 'geocoder', '~> 1.4.3'
 
 gem 'devise', '~> 4.2.0'
