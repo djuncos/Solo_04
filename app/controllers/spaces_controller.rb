@@ -10,6 +10,21 @@ class SpacesController < ApplicationController
 		@space = Space.find(params[:id])
   	end
 
+	def create
+		@space = current_user.spaces.new(space_params)
+	    @location = Geocoder.search(@space.latitude,@space.longitude)
+	    @space.address = @location[0].address
+	    @space.status = 0
+	    @space.claimed = false
+	    if @space.save
+		  flash[:notice] = "Space was successfully created."
+		  redirect_to root
+	    else
+	      redirect_to :back
+	    end
+	end
+
+
   	def put
   		@space_pre = Space.find(params[:space_id])
   		@space = @space_pre.update(:claimed=>true)
@@ -27,6 +42,32 @@ class SpacesController < ApplicationController
 	      render 'edit'
 	    end
   	end
+
+  	def destroy
+		    Space.find(params[:id]).destroy
+		    flash[:notice] = "Space was successfully deleted."
+		    redirect_to root
+	end
+
+	def transfer
+
+			# @space_out = Space.find(params[:id])
+			# @space_lat = @space_out.latitude
+			# @space_long = @space_out.longitude
+			# @space_out.destroy
+
+		 #    @space_in = Space.create(user_id: current_user.id)
+		 #    @space_in.latitude = @space_lat
+		 #    @space_in.longitude = @space_long
+
+		 @space = Space.find(params[:id])
+		 @space.update(:user_id => current_user.id, :status => 0, :claimed => false)
+		 flash[:notice] = "Space was successfully created."
+		 redirect_to root_url
+
+	end
+
+
 
 	private
 

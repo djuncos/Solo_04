@@ -5,21 +5,38 @@ users.index
 <br>
 <br>
 
-<h3>Submitting here creates a new Destination, with fields: :address, :user_id, :user_act_latitude, :user_act_longitude.</h3>
-<h3>After mobile, :user_act_latitude and :user_act_longitude will be submitted automatically by the device GPS.</h3>
+<% if @space == nil %>
 
-
-
-
-<br>
-<br>
-
-
-
+	<h3>Submitting here creates a new Destination, with fields: :address, :user_id, :user_act_latitude, :user_act_longitude.</h3>
+	<h3 class="mobileGPS">Any data posted in forms with a blue outline will be gathered automatically from the device GPS in the mobile version.</h3>
+	<br>
+	<br>
 	<div class="destination_form_container">
-	 	<%= render 'destinations/form' %>
-
+		 	<%= render 'destinations/form' %>
 	</div>
 
+<% else %>
 
-	<!-- 39.934364, -75.185246 -->
+	<h3>You are currently parked at</h3>
+
+	<h3><%= @space.latitude %> , <%= @space.longitude %></h3>
+
+	<button>Click here when you're heading back to your car.</button>
+
+
+
+<% end %>
+
+
+<!-- for viewing purposes -->
+
+<ul>
+
+<% @spaces.each do |space| %>
+
+	<li>id <%= space.id %> user_id <%= space.user_id %> user <%= space.user.email %> status <%= space.status %> claimed <%= space.claimed %></li>
+	
+	
+	<% end %>
+
+</ul>

@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :destinations
-  resources :spaces
-  # resources :spaces, { :except => [:show, :new, :index] }
 
-  # patch "/spaces", to: "spaces#show"
+  post "/spaces/:id" => "spaces#transfer"
+  resources :spaces
+
+
+ 
 
 
 end

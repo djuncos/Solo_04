@@ -10,10 +10,31 @@ spaces.show
 
 
 
+<p>Here is a map and directions (cooridinates) to the space:</p>
 
-  <%= @space.latitude %>
+<%= @space.latitude %>
   <%= @space.longitude %>
+<br>
+
+<p>From here, three things are possible:</p>
+
+<br>
+<span>1.)  You find another available space before your claimed space and will park there instead.</span><button>Click here WHEN YOU ARE AT THE NEW-FOUND SPACE.</button><p>This will do two things:</p>
+<ul><li>a.) Set your previously clamed space to now have :claim 'false'</li><li>b.) Access your location and create a new space (which belongs to you)</li>
+</ul>
+
+<br>
+
+<span>2.)  You arrive at the space only to find it is no longer open.</span><button>Click here if that happens.</button><p>This will do two things:</p>
+<ul><li>a.) Destroy the claimed space.</li><li>b.) Access your location and take you back to destination.show, with your current location</li>
+</ul>
+
+<br>
+
+<span>3.)  You arrive at the space, it is open, you park there.</span><%= link_to "Click here WHEN YOU PARK", space_path, method: :transfer %><p>This will do two things:</p>
+<ul><li>a.) Destroy the claimed space (if it is not already destroyed)</li><li>b.) Access your location and create a new space (which belongs to you)</li>
+</ul>
 
 
 
-
+<br>

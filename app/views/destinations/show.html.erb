@@ -17,7 +17,7 @@ destinations.show
 	var m=0
    	var n=0
 
-   	var acceptable_distance = 600 //meters
+   	var acceptable_distance = 1000 //meters
    	var acceptable_spaces=[]
 
 	var locations_green = []
@@ -58,10 +58,7 @@ destinations.show
 				locations_green.push(together);
 				acceptable_spaces.push(spaceIdent)
 			}
-			
 		</script>
-		<span><%= link_to space.id, put_path(space_id: space.id), :method=> :put%></span>
-
 	<% end %>
 
 
@@ -76,9 +73,7 @@ destinations.show
 				locations_yellow.push(together);
 				acceptable_spaces.push(spaceIdent)
 			}
-			
 		</script>
-		<span><%= link_to space.id, put_path(space_id: space.id), :method=> :put%></span>
 	<% end %>
 
 
@@ -142,25 +137,22 @@ destinations.show
 <script type="text/javascript">
 
 	
-m = locations_green.length
-n = locations_yellow.length
+	m = locations_green.length
+	n = locations_yellow.length
 
-for(i=0;i<m;i++){
-	var j=i+1
-	var k=acceptable_spaces[i]
-	$('.spaceContainer').append(
-							"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='greenSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
-						);
-}
+	for(i=0;i<m;i++){
+		var j=i+1
+		var k=acceptable_spaces[i]
+		$('.spaceContainer').append(
+								"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='greenSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
+							);
+	}
 
-for(i=m;i<(m+n);i++){
-	var j=i+1
-	var k=acceptable_spaces[i]
-	$('.spaceContainer').append(
-							"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='yellowSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
-						);
-}
-
-
-
+	for(i=m;i<(m+n);i++){
+		var j=i+1
+		var k=acceptable_spaces[i]
+		$('.spaceContainer').append(
+								"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='yellowSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
+							);
+	}
 </script>
