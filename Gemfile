@@ -5,6 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'faker'
+
+gem 'delayed_job_active_record'
+
 gem 'json', '~> 1.8.3'
 
 gem 'geocoder', '~> 1.4.3'

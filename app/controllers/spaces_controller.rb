@@ -3,11 +3,18 @@ class SpacesController < ApplicationController
 
 	def show
 		 @space = Space.find(params[:id])
+		 @destination = current_user.destinations.last 
 		    
 	end
 
 	def edit
 		@space = Space.find(params[:id])
+  	end
+
+  	def different
+
+
+
   	end
 
 	def create
@@ -62,7 +69,7 @@ class SpacesController < ApplicationController
 
 		 @space = Space.find(params[:id])
 		 @space.update(:user_id => current_user.id, :status => 0, :claimed => false)
-		 flash[:notice] = "Space was successfully created."
+		 flash[:notice] = "Space was successfully transferred."
 		 redirect_to root_url
 
 	end
@@ -73,6 +80,10 @@ class SpacesController < ApplicationController
 
 	def space_params
 	      params.require(:space).permit(:latitude, :longitude, :status)
+	end
+
+	def destination_params
+	      params.require(:destination).permit(:id, :address, :user_act_latitude, :user_act_longitude)
 	end	
 
 

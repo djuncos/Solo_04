@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require_bootstrap.min
+
  */
 
 
@@ -80,10 +82,27 @@
       .mobileGPS{
 
 
-        width: 30%;
+        width: 60%;
         height: auto;
         border: solid blue 2px;
 
+
+
+      }
+
+      #parkedAddress{
+
+        width: 300px;
+        height: 50px;
+        outline: solid orange 1px;
+
+
+
+      }
+
+      .madeup{
+
+        display: none;
 
 
       }

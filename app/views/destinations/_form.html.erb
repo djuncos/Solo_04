@@ -1,12 +1,20 @@
 <%= form_for(@destination) do |f| %>
 
-	<div class="field new_destination">
-	   <%= f.label :address, "Enter destination address"%>
-	   <div class="new_destination_address">
-	   		<%= f.text_field :address %>
-	   </div>
 
-	   <div class="mobileGPS">
+
+
+	<div class="field new_destination">
+
+		<% if @destination.address==nil %>
+
+		    <%= f.label :address, "Enter destination address"%>
+		    <div class="new_destination_address">
+		   		<%= f.text_field :address %>
+		    </div>
+
+		<% end %>
+
+	    <div class="mobileGPS">
 
 		   <%= f.label :user_act_latitude, "User's current latitude"%>
 		   <div class="new_destination_user_lat">
@@ -18,12 +26,12 @@
 		   		<%= f.text_field :user_act_longitude %>
 		   </div>
 
-	   </div>
+	    </div>
 
 
-	   <div class="actions">
-	    <%= f.submit class: "btn btn-primary"%>
-	  </div>
+	    <div class="actions">
+	    	<%= f.submit class: "btn btn-primary"%>
+	    </div>
 	</div>
 
 

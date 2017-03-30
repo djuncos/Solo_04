@@ -5,7 +5,7 @@ users.index
 <br>
 <br>
 
-<% if @space == nil %>
+
 
 	<h3>Submitting here creates a new Destination, with fields: :address, :user_id, :user_act_latitude, :user_act_longitude.</h3>
 	<h3 class="mobileGPS">Any data posted in forms with a blue outline will be gathered automatically from the device GPS in the mobile version.</h3>
@@ -15,20 +15,20 @@ users.index
 		 	<%= render 'destinations/form' %>
 	</div>
 
-<% else %>
 
-	<h3>You are currently parked at</h3>
 
-	<h3><%= @space.latitude %> , <%= @space.longitude %></h3>
-
-	<button>Click here when you're heading back to your car.</button>
+	
 
 
 
-<% end %>
 
 
 <!-- for viewing purposes -->
+
+<br>
+<br>
+
+Spaces owned at the moment:
 
 <ul>
 

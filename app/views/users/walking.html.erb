@@ -1,0 +1,32 @@
+<h3>You are walking to your car.</h3>
+
+	The status of your space has been set to 1 ("available_soon").
+
+	The GPS in your device is now tracking your location rather than periodically updating it (as opposed to as it was when your space was in state 0).  Once you reach your space, your location will be recognized as being at your space, and the status of your space will update to 2 ("available").
+
+	Or, if you like, you can ...
+
+	<%= link_to "...click here when you arrive at your space.", arrived_update_path %>
+
+	<br>
+
+	Once the status of your space updates to 2, then after a set time (depending on the time of day), your space will be destroyed.
+
+
+	<!-- for viewing purposes -->
+
+<br>
+<br>
+
+Spaces owned at the moment:
+
+<ul>
+
+<% @spaces.each do |space| %>
+
+	<li>id <%= space.id %> user_id <%= space.user_id %> user <%= space.user.email %> status <%= space.status %> claimed <%= space.claimed %></li>
+	
+	
+	<% end %>
+
+</ul>

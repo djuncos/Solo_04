@@ -26,6 +26,16 @@
 		    end
 		end
 
+		def update
+		    @destination = Destination.find(params[:id])
+		    if @destination.update_attributes(destination_params)
+		      flash[:notice] = "Destination was successfully updated."
+		      redirect_to @destination
+		    else
+		      render 'edit'
+		    end
+	  	end
+
 
 
 		def destroy
