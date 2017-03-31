@@ -2,157 +2,174 @@
 
 <br>
 <br>
-destinations.show
+
 <br>
 
-<h3>This page features a map showing the user's current location (blue), the destination (red), and any spaces near the destination that are available (green) or available soon (yellow).</h3>
+<div class="page">destinations.show</div>
+	<div class="explain">
+ 
+		<h4>This page features a map showing the user's current location (blue), the destination (red), and any spaces near the destination that are available (green) or available soon (yellow).</h4>
+
+	</div>
+
+<div class="phoneContainer">
+<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+<!-- <h2><%= @destination.address %></h2> -->
 
 
-<h2><%= @destination.address %></h2>
-
-
-<script type="text/javascript">
-
-		
-	var m=0
-   	var n=0
-
-   	var acceptable_distance = 400 //meters
-   	var acceptable_spaces=[]
-
-	var locations_green = []
-  	var locations_yellow =[]
-
-  	var dest_lat = <%= @destination.latitude %>
-    var dest_long = <%= @destination.longitude %>
-
-	var user_lat = <%= @destination.user_act_latitude %>
-    var user_long = <%= @destination.user_act_longitude %>
-
-  	function distance(lat1,long1,lat2,long2){
-	    var R = 6371e3; // metres
-	    var φ1 = lat1*Math.PI/180;
-	    var φ2 = lat2*Math.PI/180;
-	    var Δφ = (lat2-lat1)*Math.PI/180;
-	    var Δλ = (long2-long1)*Math.PI/180;
-	    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-	        Math.cos(φ1) * Math.cos(φ2) *
-	        Math.sin(Δλ/2) * Math.sin(Δλ/2);
-	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	    var d = R * c;
-	    return d
-  	}
-
-
-</script>
-	<!-- This needs to be fixed!  Ruby in a loop. -->
-
-	<% @spaces_green.each do |space| %>
-		<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
-		<script type="text/javascript">	
-			var hori = <%= space.latitude %>
-			var vert = <%= space.longitude %>
-			var spaceIdent = <%= space.id %>
-			if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
-				var together = {lat: hori,lng:vert};
-				locations_green.push(together);
-				acceptable_spaces.push(spaceIdent)
-			}
-		</script>
-	<% end %>
-
-
-	<% @spaces_yellow.each do |space| %>
-		<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
-		<script type="text/javascript">	
-			var hori = <%= space.latitude %>
-			var vert = <%= space.longitude %>
-			var spaceIdent = <%= space.id %>
-			if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
-				var together = {lat: hori,lng:vert}
-				locations_yellow.push(together);
-				acceptable_spaces.push(spaceIdent)
-			}
-		</script>
-	<% end %>
-
-
-
-<script type="text/javascript">
-
-	function midpoint(x,y){
-        return y
-  	}
-
-  	function initMap() {
-        var dest_location = {lat: dest_lat, lng: dest_long};
-        var user_location = {lat: user_lat, lng: user_long};
-        var focalpoint = midpoint(user_location,dest_location)
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: focalpoint
-        });
-        var destination_marker = new google.maps.Marker({
-          position: dest_location,    
-          map: map
-        });
-        var user_marker = new google.maps.Marker({
-          position: user_location,
-          icon: '/assets/user03.png',    
-          map: map
-        });
-        var k = locations_green.length
-        var markersGreen = locations_green.map(function(location, i) {
-          return new google.maps.Marker({
-            position: location,
-            label: (i+1).toString(),
-            icon: 'http://maps.google.com/mapfiles/ms/icons/green.png',
-            map: map
-          });
-        });
-        var markersYellow = locations_yellow.map(function(location, i) {
-          return new google.maps.Marker({
-            position: location,
-            label: (i+1+k).toString(),
-            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow.png',
-            map: map
-          });
-        });
-    }
-
-
-</script>
 
 <div class="container">
-	<div id="map"></div>
-	<div class="spaceContainer"></div>
-</div>
-<br>
- 
+	<script type="text/javascript">
+		var dest_lat
+	    var dest_long
+			
+		var m=0
+	   	var n=0
+
+	   	var acceptable_distance = 1000 //meters
+	   	var acceptable_spaces=[]
+
+		var locations_green = []
+	  	var locations_yellow =[]
+
+	  	dest_lat = <%= @destination.latitude %>
+	    dest_long = <%= @destination.longitude %>
+
+		var user_lat = <%= @destination.user_act_latitude %>
+	    var user_long = <%= @destination.user_act_longitude %>
+
+	  	function distance(lat1,long1,lat2,long2){
+		    var R = 6371e3; // metres
+		    var φ1 = lat1*Math.PI/180;
+		    var φ2 = lat2*Math.PI/180;
+		    var Δφ = (lat2-lat1)*Math.PI/180;
+		    var Δλ = (long2-long1)*Math.PI/180;
+		    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+		        Math.cos(φ1) * Math.cos(φ2) *
+		        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+		    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		    var d = R * c;
+		    return d
+	  	}
 
 
-<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+	</script>
 
-<script type="text/javascript">
+		<% @spaces_green.each do |space| %>
+			<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
+			<script type="text/javascript">	
+				var hori = <%= space.latitude %>
+				var vert = <%= space.longitude %>
+				var spaceIdent = <%= space.id %>
+				if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
+					var together = {lat: hori,lng:vert};
+					locations_green.push(together);
+					acceptable_spaces.push(spaceIdent)
+				}
+			</script>
+		<% end %>
+
+
+		<% @spaces_yellow.each do |space| %>
+			<!-- <li><%= space.latitude %><%= space.longitude %></li> -->
+			<script type="text/javascript">	
+				var hori = <%= space.latitude %>
+				var vert = <%= space.longitude %>
+				var spaceIdent = <%= space.id %>
+				if(distance(hori,vert,dest_lat,dest_long)<acceptable_distance){
+					var together = {lat: hori,lng:vert}
+					locations_yellow.push(together);
+					acceptable_spaces.push(spaceIdent)
+				}
+			</script>
+		<% end %>
+
+
+
+	<script type="text/javascript">
+
+		function midpoint(x,y){
+	        return y
+	  	}
+
+	  	function initMap() {
+	        var dest_location = {lat: dest_lat, lng: dest_long};
+	        var user_location = {lat: user_lat, lng: user_long};
+	        var focalpoint = midpoint(user_location,dest_location)
+
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 15,
+	          center: focalpoint
+	        });
+	        var destination_marker = new google.maps.Marker({
+	          position: dest_location,    
+	          map: map
+	        });
+	        var user_marker = new google.maps.Marker({
+	          position: user_location,
+	          icon: '/assets/user04.png',    
+	          map: map
+	        });
+	        var k = locations_green.length
+	        var markersGreen = locations_green.map(function(location, i) {
+	          return new google.maps.Marker({
+	            position: location,
+	            label: (i+1).toString(),
+	            icon: 'http://maps.google.com/mapfiles/ms/icons/green.png',
+	            map: map
+	          });
+	        });
+	        var markersYellow = locations_yellow.map(function(location, i) {
+	          return new google.maps.Marker({
+	            position: location,
+	            label: (i+1+k).toString(),
+	            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow.png',
+	            map: map
+	          });
+	        });
+	    }
+
+
+	</script>
+
+	<div class="mapSpaceContainer">
+		<div class="mapContainer">
+			<div id="map"></div>
+
+			<br>
+	 	</div>
+	
+		<div class="spaceContainer"></div>
+	</div>
+
 
 	
-	m = locations_green.length
-	n = locations_yellow.length
 
-	for(i=0;i<m;i++){
-		var j=i+1
-		var k=acceptable_spaces[i]
-		$('.spaceContainer').append(
-								"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='greenSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
-							);
-	}
+	<script type="text/javascript">
 
-	for(i=m;i<(m+n);i++){
-		var j=i+1
-		var k=acceptable_spaces[i]
-		$('.spaceContainer').append(
-								"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='yellowSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
-							);
-	}
-</script>
+		
+		m = locations_green.length
+		n = locations_yellow.length
+
+		for(i=0;i<m;i++){
+			var j=i+1
+			var k=acceptable_spaces[i]
+			$('.spaceContainer').append(
+									"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='greenSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
+								);
+		}
+
+		for(i=m;i<(m+n);i++){
+			var j=i+1
+			var k=acceptable_spaces[i]
+			$('.spaceContainer').append(
+									"<a rel='nofollow' data-method='put' href='/put?space_id="+k+"'><div class='yellowSpaceClick spaceClick' id='spaceID"+j+"'>Space "+j+"</div></a>"
+								);
+		}
+	</script>
+</div>
+<div>
+<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+
+</div>
+</div>

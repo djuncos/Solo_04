@@ -1,18 +1,33 @@
-
-<br>
-<br>
-users.index
-<br>
-<br>
+		<!-- current_user.space = @space -->
 
 
 
-	<h3>Submitting here creates a new Destination, with fields: :address, :user_id, :user_act_latitude, :user_act_longitude.</h3>
-	<h3 class="mobileGPS">Any data posted in forms with a blue outline will be gathered automatically from the device GPS in the mobile version.</h3>
+<div class="page">users.index</div>
+	<div class="explain">
+ 
+		<h4>Submitting here creates a new Destination, with fields: :address, :user_id, :user_act_latitude, :user_act_longitude.</h4>
+		<h4 class="mobileGPS">Any data posted in forms with a blue outline will be gathered automatically from the device GPS in the mobile version.</h4>
+
+	</div>
+
+
+<div class="phoneContainer">
+
+
+	
+
+	<div class="container">
+
+
+	
 	<br>
 	<br>
-	<div class="destination_form_container">
-		 	<%= render 'destinations/form' %>
+	<div class="brand_big">APP BRAND</div>
+
+		<div class="form_container">
+			 	<%= render 'destinations/form' %>
+		</div>
+
 	</div>
 
 
@@ -28,15 +43,7 @@ users.index
 <br>
 <br>
 
-Spaces owned at the moment:
 
-<ul>
 
-<% @spaces.each do |space| %>
 
-	<li>id <%= space.id %> user_id <%= space.user_id %> user <%= space.user.email %> status <%= space.status %> claimed <%= space.claimed %></li>
-	
-	
-	<% end %>
-
-</ul>
+</div>

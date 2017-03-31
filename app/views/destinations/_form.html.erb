@@ -3,13 +3,20 @@
 
 
 
-	<div class="field new_destination">
+	<!-- <div class="field new_destination"> -->
 
 		<% if @destination.address==nil %>
 
 		    <%= f.label :address, "Enter destination address"%>
 		    <div class="new_destination_address">
-		   		<%= f.text_field :address %>
+		   		<%= f.text_field :address, class: "fieldStyle" %>
+		    </div>
+
+		    <div class="empty_space">
+		    	<br>
+		    
+
+
 		    </div>
 
 		<% end %>
@@ -30,9 +37,9 @@
 
 
 	    <div class="actions">
-	    	<%= f.submit class: "btn btn-primary"%>
+	    	<%= f.submit class: "btn btn-primary buttonStyle"%>
 	    </div>
-	</div>
+	<!-- </div> -->
 
 
 

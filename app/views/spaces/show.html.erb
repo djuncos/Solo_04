@@ -1,57 +1,158 @@
-<br>
-<br>
-spaces.show
-<br>
 
-<h3>The space you clicked on has just been updated to have :claimed set to 'true'.</h3>
-
-
-<h3>You now have a claim to this space and it will not appear in any other user's search. </h3>
-
-
-
-<p>Here is a map and directions (cooridinates) to the space:</p>
-
-<%= @space.latitude %>
-  <%= @space.longitude %>
-<br>
-
-<p>From here, three things are possible:</p>
-
-<br>
-<span>1.)  You find another available space before your claimed space and will park there instead.</span>
-
-	<div class="destination_form_container">
-		 	<%= render 'destinations/form' %>
-	</div>
-	<button>Click here WHEN YOU ARE AT THE NEW-FOUND SPACE.</button>
-
-<p>This will do two things:</p>
-<ul><li>a.) Set your previously claimed space to now have :claim 'false'</li><li>b.) Access your location and create a new space (which belongs to you)</li>
-</ul>
-
-<br>
-
-<span>2.)  You arrive at the space to find it is no longer open.</span>
-
-	<div class="destination_form_container">
-		 	<%= render 'destinations/form' %>
-	</div><button>Click here if that happens.</button><p>This will do two things:</p>
-<ul><li>a.) Destroy the claimed space.</li><li>b.) Access your location and take you back to destination.show, with your current location</li>
-</ul>
-
-<br>
-
-<span>3.)  You arrive at the space, it is open, you park there.</span><%= link_to "Click here WHEN YOU PARK", space_path, method: :transfer %><p>This will do the following:</p>
-<ul>
-<!-- <li>a.) Destroy the claimed space (if it is not already destroyed)</li>
-<li>b.) Access your location and create a new space (which belongs to you)</li> -->
-<li>Transfer ownership of the spaces to you</li>
-<li>Set the :status to 0 and :claimed to false</li>
-
-(Although, ultimately I would like it to a.) destroy the claimed space (if it is not already destroyed), and b. access your location and create a new space (which belongs to you)).
-</ul>
 
 
 
 <br>
+<br>
+
+<br>
+
+<div class="page">destinations.show</div>
+  <div class="explain">
+ 
+    <p>The space you clicked on has just been updated to have :claimed set to 'true'</p>
+    <p>You now have a claim to this space and it will not appear in any other user's search. </p>
+    <p>Here is a map (and directions?) to that space.</p>
+    <p>From here, three things are possible:</p>
+    <ol>
+    <li>You find another available space before your claimed space and will park there instead.  This will do two things:</li>
+    <ol type="a">
+      <li> Set your previously claimed space to now have :claim 'false'</li>
+      <li> Access your location and create a new space (which belongs to you)</li>
+    </ol>
+    <li>You arrive at the space, but someone else has parked there. Click and this follows:</li>
+    <ol type="a">
+      <li> Destroy the claimed space (if it is not already destroyed)</li>
+      <li> Access your location and send you back to the list of available spaces</li>
+    </ol>
+    <li>You arrive at the space, it is open, you park there. This will do the following:</li>
+  <!--   <ol type="a">
+      <li> Transfer ownership of the spaces to you</li>
+      <li> Set the :status to 0 and :claimed to false</li>
+    </ol> -->
+    <p>omgomgomg</p>
+  </ol>
+ 
+
+
+
+  </div>
+
+<div class="phoneContainer">
+<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+<!-- <h2><%= @destination.address %></h2> -->
+
+
+
+<div class="container">
+  <script type="text/javascript">
+
+      
+    var dest_lat = <%= @destination.latitude %>
+    var dest_long = <%= @destination.longitude %>
+
+    var user_lat = <%= @destination.user_act_latitude %>
+    var user_long = <%= @destination.user_act_longitude %>
+
+    var space_lat = <%= @space.latitude %>
+    var space_long = <%= @space.longitude %>
+
+  </script>
+    <!-- This needs to be fixed!  Ruby in a loop. -->
+
+ 
+
+
+
+  <script type="text/javascript">
+
+   function midpoint(x,y){
+        return y
+    }
+  
+
+  function initMap() {
+        var dest_location = {lat: dest_lat, lng: dest_long};
+        var user_location = {lat: user_lat, lng: user_long};
+        var space_location = {lat: space_lat, lng: space_long};
+        var focalpoint = midpoint(user_location,space_location)
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: focalpoint
+        });
+        var destination_marker = new google.maps.Marker({
+          position: dest_location,    
+          map: map
+        });
+        var user_marker = new google.maps.Marker({
+          position: user_location,
+          icon: '/assets/user04.png',    
+          map: map
+        });
+        var space_marker = new google.maps.Marker({
+          position: space_location,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/yellow.png',    
+          map: map
+        });
+    }
+
+  </script>
+
+  <div class="mapSpaceContainer">
+    <div class="mapContainer">
+      <div id="map"></div>
+
+      <br>
+    </div>
+  
+    <div class="all_form_ontainer">
+      
+       <div class="destination_form_container mobileGPS">
+
+          <%= form_tag ("/spaces") do %>
+            <%= label_tag :latitude %>
+            <%= text_field_tag :latitude %>
+
+            <%= label_tag :longitude %>
+            <%= text_field_tag :longitude %>
+
+            <%= hidden_field_tag :claimed_space_id, @space.id %>
+
+            <%= submit_tag %>
+          <% end %>
+      </div>
+
+      <div class="destination_form_container mobileGPS">
+
+          <%= form_tag ("/delete-edit") do %>
+            <%= label_tag :horizontal %>
+            <%= text_field_tag :horizontal %>
+
+            <%= label_tag :vertical %>
+            <%= text_field_tag :vertical %>
+
+            <%= hidden_field_tag :id, @space.id %>
+
+            <%= submit_tag %>
+          <% end %>
+      </div>
+
+      <%= button_to "Click here WHEN YOU PARK", space_path, method: :transfer %>
+
+    </div>
+  </div>
+
+
+  
+
+   
+    <button>Click here WHEN YOU ARE AT THE NEW-FOUND SPACE.</button> -->
+
+
+</div>
+<div>
+<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+
+</div>
+</div>

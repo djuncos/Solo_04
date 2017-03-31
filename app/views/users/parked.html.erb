@@ -1,103 +1,53 @@
-<h3>You are currently parked at</h3>
-
-
-	<script type="text/javascript">
-
-	var output
-		
-	var first = <%= @space.latitude %>
-
-	var second = <%= @space.longitude %>
-
-
-
-  	function addressReturn(lat,lng){
-
-        
-	        var geocoder = new google.maps.Geocoder;
-	        var latitude = lat.toString()
-	        var longitude = lng.toString()
-	        var input = lat.toString()+","+lng.toString()
-	        var latlngStr = input.split(',', 2);
-	        var y = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-	          geocoder.geocode({'location': y}, function(results, status) {
-	            if (status === 'OK') {
-	              if (results[1]) {
-	                output = (results[1].formatted_address)
-	              } else {
-	                output =  ('No results found');
-	              }
-	            } else {
-	              output = ('Geocoder failed due to: ' + status);
-	            }
-	          });
-	 }
-
-	// function addressReturn(a,b){
-
-	   
-	        
-	//     $.getJSON('https://nominatim.openstreetmap.org/reverse', {
-	//         lat: a,
-	//         lon: b,
-	//         format: 'json',
-	//     }, function (result) {
-	//         output = result
-	//     });
-	        
-	//  }
-
-
-	var x = addressReturn(first,second)
-
-	console.log(x.address)
-
-
-
-	
-
-
-	</script>
-
-	<div id="parkedAddress"></div>
-
-
-	<h3><%= @space.latitude %> , <%= @space.longitude %></h3>
-
-	Once you are parked, your mobile device's GPS will periodically send your coordinates to the cloud, which will calculate your distance from your space, recording your max distance.  If your distance sent is less than half the max distance, the app will send a notification to your device asking if you are headed to your space.  If you respond "no", nothing happens.  If you respond "yes", then your space is moved from status 0 ("occupied") to status 1 ("available_soon").
-
-	Or, if the user desires, he/she can ...
-
-	
-	<%= link_to "click here when heading back to your space", walking_update_path %>
-
-
-	<br>
+<br>
 <br>
 
-Spaces owned at the moment:
+<br>
 
-<ul>
+<div class="page">destinations.show</div>
+  <div class="explain">
+ 
+    <p>Once you are parked, your mobile device's GPS will periodically send your coordinates to the cloud, which will calculate your distance from your space, recording your max distance.</p>
+    <p>If your distance sent is less than half the max distance, the app will send a notification to your device asking if you are headed to your space</p>
+    <p>If you respond "no", nothing happens</p>
+    <p>If you respond "yes", then your space is moved from status 0 ("occupied") to status 1 ("available_soon")</p>
 
-<% @spaces.each do |space| %>
+	<p>Or, if the user can click here when heading back to his/her space.</p>
+ 
 
-	<li>id <%= space.id %> user_id <%= space.user_id %> user <%= space.user.email %> status <%= space.status %> claimed <%= space.claimed %></li>
+
+
+</div>
+
+<div class="phoneContainer">
+
+
+	<div class="container">
+
+	<h3>You are currently parked near:</h3>
+
+
+
 	
-	
-	<% end %>
 
-</ul>
-
-<script type="text/javascript">
-
-	// console.log("Hello")
-	
-
-	// console.log(output.address.house_number)
-
-	// document.getElementById('parkedAddress').innerHTML = output.address.house_number+" "+output.address.road
+		<div id="parkedAddress">
 
 
+		
+		<p><%=Space.search(@space.latitude.to_s,@space.longitude.to_s)["results"][0]["formatted_address"]%></p>
 
-</script>
+		</div>
+
+		
+
+		<br>
+	<br>
+
+	<%= link_to "click here when heading back to your space", walking_update_path %>
+
+	</div>
+		
+		
+
+
+</div>
 

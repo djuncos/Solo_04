@@ -20,4 +20,8 @@ Rails.application.routes.draw do
 
   get "/arrived-update", to: "users#arrived_update", as: "arrived_update"
 
+
+  post "/delete-edit" => "spaces#delete_edit"
+
+
 end

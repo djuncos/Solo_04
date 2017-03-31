@@ -9,19 +9,18 @@
 
 require 'faker'
 
+users = []
 
 50.times do
-  User.create(email: Faker::Internet.email,
+  users << User.create(email: Faker::Internet.email,
               password: 123456)
 end
 
-users = User.all
-
 users.each do |user|
 
-	lat = rand(39.928494..39.937511)
+	lat = rand(39.918160..39.944223)
 
-	lng = rand(-75.181917..-75.171231)
+	lng = rand(-75.187947..-75.153013)
 
 	stat = rand(0..2)
 

@@ -19,9 +19,9 @@
 
 	  #map {
         height: 100%;
-        width: 50%;
-        display: inline-block;
-        float: left;
+        width: 100%;
+       /* display: block;
+        float: left;*/
         /*display: none;*/
       }
       
@@ -31,36 +31,162 @@
         padding: 0;
       }
 
+      .page{
+/*
+        float: right;*/
+        margin-top: 1.23%;
+        margin-right: 5%;
+        position: absolute;
+        left: 90%;
+        top: 10%;
+
+      }
+
+      .explain{
+
+        
+        position: absolute;
+        width: 45%;
+        outline: solid pink 1px;
+        left:55%;
+        margin-top: 8%;
+        height: 70%;
+  
+
+
+      }
+
+      .phoneContainer{
+
+
+        text-align: center;
+        height: 95%;
+        width: 30%;
+        border: solid black 5px;
+        overflow: hidden;
+        margin-left: 15%;
+        margin-top: 1%;
+        border-radius: 30px;
+
+      }
+
       .container{
+
+        
+        outline: solid green 1px;
+        display: inline-block;
+        height: 97%;
+        width: 95%;
+        margin-top: 2%;
+
+      }
+
+      .brand_big{
+
+        width: 100%;
+        height: 30%;
+        outline: solid purple 1px;
+        font-size: 120%;
+
+
+      }
+
+
+      .form_container{
+
+        margin: 0 auto;
+        outline: solid red 1px;
+        height: 60%;
+        font-size: 150%;
+      }
+
+      .buttonStyle{
+
+        width: 100%! important;
+        height: 20%! important;
+        font-size: 120%! important;
+
+      }
+
+      .empty_space{
+
+        height: 30%;
+        width: 100%;
+        display: block;
+
+      }
+
+       .fieldStyle{
+
+
+        width: 100%;
+        height: 40px;
+
+
+      }
+
+
+      .mobileGPS{
+
+        width: 100%;
+        height: auto;
+        border: solid blue 2px;
+        margin: 0 auto;
+        opacity: 0.5;
+      }
+
+      .mapContainer{
+
+
+        width: 100%;
+        height: 50%;
+        border: solid orange 1px;
+        margin-top: 5%;
+
+
+
+      }
+
+      .mapSpaceContainer{
       	width: 100%;
-      	height: 50%;
-      	border: solid orange 1px;
+      	height: 100%;
+      	/*border: solid orange 1px;*/
+       /* margin-top: 10%;*/
       }
 
       .spaceContainer{
 
-      	width: 50%;
-      	height: 100%;
+      	width: 100%;
+      	height: 25%;
       	outline: solid blue 1px;
-      	display: inline-block;
-        float: left;
+      /*	display: inline-block;
+        float: left;*/
+        display: block;
+        overflow: hidden;
+
 
 
       }
 
       .greenSpaceClick{
 
-      	height: 30px;
-      	width: 20%;
+      	height: 50px;
+        width: 50%;
         outline: solid green 2px;
+        display: inline;
+        float: left;
+        font-size: 200%;
 
       }
 
       .yellowSpaceClick{
 
-        height: 30px;
-        width: 20%;
+        height: 50px;
+        width: 50%;
         outline: solid yellow 2px;
+        display: inline;
+        float: left;
+        font-size: 200%;
 
       }
 
@@ -79,22 +205,13 @@
 
       }
 
-      .mobileGPS{
-
-
-        width: 60%;
-        height: auto;
-        border: solid blue 2px;
-
-
-
-      }
 
       #parkedAddress{
 
-        width: 300px;
-        height: 50px;
+        width: 100%;
+        height: 20%;
         outline: solid orange 1px;
+        font-size: 200%;
 
 
 
@@ -106,3 +223,20 @@
 
 
       }
+
+
+      .all_form_container{
+
+        width: 100%;
+        height: 40%;
+        outline: solid blue 1px;
+      /*  display: inline-block;
+        float: left;*/
+        display: block;
+        overflow: hidden;
+
+
+      }
+
+
+     

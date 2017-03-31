@@ -7,7 +7,9 @@
 
 
 		def show
-		    @destination = Destination.find(params[:id])
+			@user = current_user
+			@destination = @user.destinations.last
+			  # @destination = Destination.find(params[:id])
 		    @spaces_unclaimed = Space.where(:claimed => false)
 		    @spaces_green = @spaces_unclaimed.where(:status => 2)
 		    @spaces_yellow = @spaces_unclaimed.where(:status => 1)

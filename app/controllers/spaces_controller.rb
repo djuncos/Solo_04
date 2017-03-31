@@ -2,8 +2,10 @@ class SpacesController < ApplicationController
 
 
 	def show
-		 @space = Space.find(params[:id])
-		 @destination = current_user.destinations.last 
+		@user = current_user
+		@space = Space.find(params[:id])
+
+	    @destination = current_user.destinations.last 
 		    
 	end
 
@@ -18,14 +20,27 @@ class SpacesController < ApplicationController
   	end
 
 	def create
-		@space = current_user.spaces.new(space_params)
-	    @location = Geocoder.search(@space.latitude,@space.longitude)
-	    @space.address = @location[0].address
+		claimed_space = Space.find(params[:claimed_space_id])
+		claimed_space.claimed = false
+		claimed_space.save
+
+		@space = Space.create(user_id: current_user.id, 
+						   latitude: params[:latitude], 
+						   longitude: params[:longitude])
+
+	    # @location = Geocoder.search(@space.latitude,@space.longitude)
+	    # @space.address = @location[0].address
+
 	    @space.status = 0
 	    @space.claimed = false
+
+
 	    if @space.save
+	    			current_user.space = @space
+	    			current_user.save
+
 		  flash[:notice] = "Space was successfully created."
-		  redirect_to root
+		  redirect_to root_path
 	    else
 	      redirect_to :back
 	    end
@@ -55,6 +70,27 @@ class SpacesController < ApplicationController
 		    flash[:notice] = "Space was successfully deleted."
 		    redirect_to root
 	end
+
+
+	def delete_edit
+
+		destination = current_user.destinations.last
+		# destination.user_act_latitude = params[:user_act_latitude]
+		# destination.user_act_longitude = params[:user_act_longitude]
+		# destination.save
+
+		destination.update(:user_act_latitude=>params[:horizontal],:user_act_longitude=>params[:vertical])
+
+		current_space = Space.find(params[:id])
+		current_space.destroy
+
+		
+
+		# @destination = current_user.destinations.last
+		redirect_to current_user.destinations.last
+
+	end
+
 
 	def transfer
 
