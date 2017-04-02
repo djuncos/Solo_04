@@ -13,7 +13,7 @@
 	</div>
 
 <div class="phoneContainer">
-<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+
 <!-- <h2><%= @destination.address %></h2> -->
 
 
@@ -26,7 +26,7 @@
 		var m=0
 	   	var n=0
 
-	   	var acceptable_distance = 1000 //meters
+	   	var acceptable_distance = 500 //meters
 	   	var acceptable_spaces=[]
 
 		var locations_green = []
@@ -140,6 +140,10 @@
 	 	</div>
 	
 		<div class="spaceContainer"></div>
+
+		<br>
+
+			<%= link_to "Reset Destination", destination_path(@destination), method: :delete, class: "btn btn-primary wide_button" %>
 	</div>
 
 
@@ -167,9 +171,8 @@
 								);
 		}
 	</script>
-</div>
-<div>
-<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+
 
 </div>
+
 </div>

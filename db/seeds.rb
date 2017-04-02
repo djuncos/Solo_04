@@ -11,7 +11,7 @@ require 'faker'
 
 users = []
 
-50.times do
+100.times do
   users << User.create(email: Faker::Internet.email,
               password: 123456)
 end

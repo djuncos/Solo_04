@@ -7,7 +7,7 @@
 
 <br>
 
-<div class="page">destinations.show</div>
+<div class="page">spaces.show</div>
   <div class="explain">
  
     <p>The space you clicked on has just been updated to have :claimed set to 'true'</p>
@@ -20,17 +20,22 @@
       <li> Set your previously claimed space to now have :claim 'false'</li>
       <li> Access your location and create a new space (which belongs to you)</li>
     </ol>
+    <br>
     <li>You arrive at the space, but someone else has parked there. Click and this follows:</li>
     <ol type="a">
       <li> Destroy the claimed space (if it is not already destroyed)</li>
       <li> Access your location and send you back to the list of available spaces</li>
     </ol>
+    <br>
     <li>You arrive at the space, it is open, you park there. This will do the following:</li>
-  <!--   <ol type="a">
-      <li> Transfer ownership of the spaces to you</li>
-      <li> Set the :status to 0 and :claimed to false</li>
-    </ol> -->
-    <p>omgomgomg</p>
+    <!-- <ol type="a"> -->
+      <!-- <li> Transfer ownership of the spaces to you</li> -->
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Transfer ownership of the spaces to you
+     <!--  <li> Set the :status to 0 and :claimed to false</li> -->
+        <br>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Set the :status to 0 and :claimed to false
+  <!--   </ol> -->
+    <!-- <p>omgomgomg</p>berbeber -->
   </ol>
  
 
@@ -39,7 +44,7 @@
   </div>
 
 <div class="phoneContainer">
-<%= link_to "reset destination", destination_path(@destination), method: :delete %>
+
 <!-- <h2><%= @destination.address %></h2> -->
 
 
@@ -108,39 +113,52 @@
   
     <div class="all_form_ontainer">
       
-       <div class="destination_form_container mobileGPS">
+       <div class="destination_form_container">
+
+          <div class="mobileGPS">
 
           <%= form_tag ("/spaces") do %>
             <%= label_tag :latitude %>
             <%= text_field_tag :latitude %>
 
+            <br>
+
             <%= label_tag :longitude %>
             <%= text_field_tag :longitude %>
 
+          </div>
+
             <%= hidden_field_tag :claimed_space_id, @space.id %>
 
-            <%= submit_tag %>
+            <%= submit_tag "Situation 1", class: "btn btn-primary wide_button"%>
           <% end %>
       </div>
+    
 
-      <div class="destination_form_container mobileGPS">
+      <div class="destination_form_container">
 
+          <div class="mobileGPS">
           <%= form_tag ("/delete-edit") do %>
-            <%= label_tag :horizontal %>
+            <%= label_tag :horizontal, "Latitude" %>
             <%= text_field_tag :horizontal %>
+            <br>
 
-            <%= label_tag :vertical %>
+            <%= label_tag :vertical, "Longitude" %>
             <%= text_field_tag :vertical %>
+
+          </div>
 
             <%= hidden_field_tag :id, @space.id %>
 
-            <%= submit_tag %>
+            <%= submit_tag "Situation 2", class: "btn btn-primary wide_button" %>
           <% end %>
       </div>
 
-      <%= button_to "Click here WHEN YOU PARK", space_path, method: :transfer %>
+      <%= button_to "Situation 3", space_path, method: :transfer, class: "btn btn-primary wide_button"  %>
 
     </div>
+
+    <%= link_to "Reset Destination", destination_path(@destination), method: :delete, class: "btn btn-primary wide_button"%>
   </div>
 
 
@@ -151,8 +169,8 @@
 
 
 </div>
-<div>
-<%= link_to "reset destination", destination_path(@destination), method: :delete %>
 
-</div>
+
+
+
 </div>

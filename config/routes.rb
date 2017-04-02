@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get "/walking", to: "users#walking", as: "walking"
 
-  get "/walking-update", to: "users#walking_update", as: "walking_update"
+  post "/walking-update", to: "users#walking_update", as: "walking_update"
  
   get "/arrived", to: "users#index", as: "arrived"
 
