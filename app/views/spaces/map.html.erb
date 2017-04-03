@@ -1,0 +1,135 @@
+
+
+<script type="text/javascript">
+	
+
+		var dest_lat
+	    var dest_long
+			
+		var m=0
+	   	var n=0
+
+		var locations_green = []
+	  	var locations_yellow =[]
+	  	var locations_red = []
+
+	  	dest_lat = <%= @destination.latitude %>
+	    dest_long = <%= @destination.longitude %>
+
+		var user_lat = <%= @destination.user_act_latitude %>
+	    var user_long = <%= @destination.user_act_longitude %>
+
+</script>
+
+	    	<% @spaces_green.each do |space| %>
+				<script type="text/javascript">	
+					var hori = <%= space.latitude %>
+					var vert = <%= space.longitude %>
+					var spaceIdent = <%= space.id %>
+					var together = {lat: hori,lng:vert};
+					locations_green.push(together);
+				</script>
+			<% end %>
+
+			<% @spaces_yellow.each do |space| %>
+				<script type="text/javascript">	
+					var hori = <%= space.latitude %>
+					var vert = <%= space.longitude %>
+					var spaceIdent = <%= space.id %>
+					var together = {lat: hori,lng:vert};
+					locations_yellow.push(together);
+				</script>
+			<% end %>
+
+			<% @spaces_red.each do |space| %>
+				<script type="text/javascript">	
+					var hori = <%= space.latitude %>
+					var vert = <%= space.longitude %>
+					var spaceIdent = <%= space.id %>
+					var together = {lat: hori,lng:vert};
+					locations_red.push(together);
+				</script>
+			<% end %>
+
+
+<script type="text/javascript">
+
+			function midpoint(x,y){
+	        	return y
+	  		}
+
+
+function initMap() {
+	        var dest_location = {lat: dest_lat, lng: dest_long};
+	        var user_location = {lat: user_lat, lng: user_long};
+	        var focalpoint = midpoint(user_location,dest_location)
+
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 16,
+	          center: focalpoint
+	        });
+	        var destination_marker = new google.maps.Marker({
+	          position: dest_location,    
+	          map: map
+	        });
+	        var user_marker = new google.maps.Marker({
+	          position: user_location,
+	          icon: '/assets/user04.png',    
+	          map: map
+	        });
+	        var k = locations_green.length
+	        var markersGreen = locations_green.map(function(location, i) {
+	          return new google.maps.Marker({
+	            position: location,
+	            label: (i+1).toString(),
+	            icon: 'http://maps.google.com/mapfiles/ms/icons/green.png',
+	            map: map
+	          });
+	        });
+	        var markersYellow = locations_yellow.map(function(location, i) {
+	          return new google.maps.Marker({
+	            position: location,
+	            label: (i+1+k).toString(),
+	            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow.png',
+	            map: map
+	          });
+	        });
+	        var markersRed = locations_red.map(function(location, i) {
+	          return new google.maps.Marker({
+	            position: location,
+	            icon: 'http://maps.google.com/mapfiles/ms/icons/red.png',
+	            map: map
+	          });
+	        });
+	    }
+
+
+</script>
+
+
+
+
+
+<div id="map" style="height: 90%;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

@@ -19,6 +19,18 @@ class SpacesController < ApplicationController
 
   	end
 
+
+  	def map
+
+  			@user = current_user
+			@destination = @user.destinations.last
+		    @spaces = Space.all
+		    @spaces_green = @spaces.where(:status => 2)
+		    @spaces_yellow = @spaces.where(:status => 1)
+		    @spaces_red = @spaces.where(:status => 0)
+
+  	end
+
 	def create
 		claimed_space = Space.find(params[:claimed_space_id])
 		claimed_space.claimed = false

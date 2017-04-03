@@ -23,5 +23,7 @@ Rails.application.routes.draw do
 
   post "/delete-edit" => "spaces#delete_edit"
 
+  get "/map" => "spaces#map"
+
 
 end
