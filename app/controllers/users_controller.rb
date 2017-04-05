@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 		@space.save
 		flash[:notice] = "You have arrived at your space.  Have a nice day!."
 
-		@space.delay(run_at: 1.minute.from_now).destroy
+		@space.delay(run_at: 0.1.minute.from_now).destroy
 
 		redirect_to arrived_path
 
